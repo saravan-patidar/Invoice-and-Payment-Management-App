@@ -19,7 +19,6 @@ router.get('/single/:id', async (req, res) => {
 router.post('/create',async(req,res)=>{
 
     try {
-        console.log(req.body)
         const newInvoice = new Invoice(req.body);
         await newInvoice.save();
         res.status(201).json(newInvoice);
@@ -42,7 +41,7 @@ router.put('/mark-paid/:id',async(req,res)=>{
     try{
         const invoice = await Invoice.findById(req.params.id);
         if(!invoice) return res.status(404).json({message:"Invoice not Found"});
-        console.log(invoice)
+        
         invoice.status = 'Paid';
         invoice.paymentDate = new Date();
 
