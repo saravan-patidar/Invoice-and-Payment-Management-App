@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const InvoiceForm = () => {
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         invoiceTitle: "",
@@ -17,7 +18,7 @@ const InvoiceForm = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/clients`);
+                const response = await axios.get(`${API_URL}/api/clients`);
                 
                 setClients(response.data ); // Assuming the response is an array of clients
             } catch (error) {
@@ -65,7 +66,7 @@ const InvoiceForm = () => {
         const totalWithTax = total + (total * formData.tax) / 100;
         
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/invoices/create`, {...formData,totalAmount:totalWithTax});
+            const response = await axios.post(`${API_URL}/api/invoices/create`, {...formData,totalAmount:totalWithTax});
             alert('Invoice created successfully');
             navigate('/invoices');
 

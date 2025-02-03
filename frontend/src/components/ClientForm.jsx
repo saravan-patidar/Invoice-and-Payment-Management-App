@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const ClientForm = () => {
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
@@ -22,7 +23,7 @@ const ClientForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/clients/create`, formData);
+            const response = await axios.post(`${API_URL}/api/clients/create`, formData);
 
             console.log("Client created:", response.data);
             setFormData({

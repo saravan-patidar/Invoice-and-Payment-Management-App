@@ -2,19 +2,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Dashboard = () => {
-    const [invoices, setInvoices] = useState([]);
     const [summary, setSummary] = useState({ total: 0, paid: 0, pending: 0, overdue: 0 });
 
+    const API_URL = import.meta.env.VITE_API_URL;
+
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/api/invoices`)
-            .then(res => setInvoices(res.data))
-            .catch(err => console.error(err));
         fetchSummary();
     }, []);
 
     const fetchSummary = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/summary`);
+            const response = await axios.get(`${API_URL}/api/invoices/summary`);
             setSummary(response.data);
         } catch (error) {
             console.error("Error fetching summary:", error);

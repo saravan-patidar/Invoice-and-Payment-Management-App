@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const ReportsDashboard = () => {
+    const API_URL = import.meta.env.VITE_API_URL;
     const [totalIncome, setTotalIncome] = useState(0);
     const [overduePayments, setOverduePayments] = useState(0);
     const [salesData, setSalesData] = useState(0);
@@ -15,7 +16,7 @@ const ReportsDashboard = () => {
 
     const fetchTotalIncome = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/total-income`);
+            const response = await axios.get(`${API_URL}/api/reports/total-income`);
             setTotalIncome(response.data.totalIncome);
         } catch (error) {
             console.error("Error fetching total income:", error);
@@ -24,7 +25,7 @@ const ReportsDashboard = () => {
 
     const fetchOverduePayments = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/overdue-payments`);
+            const response = await axios.get(`${API_URL}/api/reports/overdue-payments`);
             setOverduePayments(response.data.overdueAmount);
         } catch (error) {
             console.error("Error fetching overdue payments:", error);
@@ -38,7 +39,7 @@ const ReportsDashboard = () => {
         }
         try {
             const response = await axios.get(
-                `${import.meta.env.VITE_API_URL}/api/reports/sales?startDate=${startDate}&endDate=${endDate}`
+                `${API_URL}/api/reports/sales?startDate=${startDate}&endDate=${endDate}`
             );
             setSalesData(response.data.totalSales);
         } catch (error) {

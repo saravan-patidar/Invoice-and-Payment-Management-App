@@ -3,11 +3,12 @@ import axios from "axios";
 
 const InvoiceDetails = ({ invoiceId, onClose }) => {
     const [invoice, setInvoice] = useState(null);
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchInvoice = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/single/${invoiceId}`);
+                const response = await axios.get(`${API_URL}/api/invoices/single/${invoiceId}`);
                 setInvoice(response.data);
             } catch (error) {
                 console.error("Error fetching invoice:", error);
