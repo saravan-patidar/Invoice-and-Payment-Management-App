@@ -4,11 +4,24 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss()],
-  server: {
-    port: 5173,
-  },
+  plugins: [react(), tailwindcss()],
   build: {
-    outDir: 'dist',
+    outDir: "dist",
+    assetsDir: "assets",
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith(".css")) {
+            return "assets/[name]-[hash][extname]";
+          }
+          return "assets/[name]-[hash][extname]";
+        },
+      },
+    },
+  },
+  server: {
+    mimeTypes: {
+      "text/css": ["css"],
+    },
   },
 })
