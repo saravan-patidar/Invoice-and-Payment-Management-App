@@ -41,7 +41,7 @@ const checkOverdueInvoices = async () => {
         console.error("Error checking overdue invoices:", error);
     }
 };
-checkOverdueInvoices();
+// checkOverdueInvoices();
 setInterval(checkOverdueInvoices,24*60*60*1000);
 
 
@@ -65,7 +65,7 @@ const sendOverdueReminders = async () => {
 };
 
 // Run daily at 9 AM
-sendOverdueReminders();
+// sendOverdueReminders();
 setInterval(sendOverdueReminders, 24 * 60 * 60 * 1000);
 
 const PORT = process.env.PORT || 5000;

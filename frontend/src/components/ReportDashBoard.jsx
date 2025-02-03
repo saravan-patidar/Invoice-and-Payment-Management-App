@@ -15,7 +15,7 @@ const ReportsDashboard = () => {
 
     const fetchTotalIncome = async () => {
         try {
-            const response = await axios.get("https://invoice-and-payment-management-app.onrender.com/api/reports/total-income");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/total-income`);
             setTotalIncome(response.data.totalIncome);
         } catch (error) {
             console.error("Error fetching total income:", error);
@@ -24,7 +24,7 @@ const ReportsDashboard = () => {
 
     const fetchOverduePayments = async () => {
         try {
-            const response = await axios.get("https://invoice-and-payment-management-app.onrender.com/api/reports/overdue-payments");
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/overdue-payments`);
             setOverduePayments(response.data.overdueAmount);
         } catch (error) {
             console.error("Error fetching overdue payments:", error);
@@ -38,7 +38,7 @@ const ReportsDashboard = () => {
         }
         try {
             const response = await axios.get(
-                `https://invoice-and-payment-management-app.onrender.com/api/reports/sales?startDate=${startDate}&endDate=${endDate}`
+                `${import.meta.env.VITE_API_URL}/api/reports/sales?startDate=${startDate}&endDate=${endDate}`
             );
             setSalesData(response.data.totalSales);
         } catch (error) {

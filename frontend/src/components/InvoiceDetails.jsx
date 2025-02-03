@@ -7,7 +7,7 @@ const InvoiceDetails = ({ invoiceId, onClose }) => {
     useEffect(() => {
         const fetchInvoice = async () => {
             try {
-                const response = await axios.get(`https://invoice-and-payment-management-app.onrender.com/api/invoices/single/${invoiceId}`);
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/single/${invoiceId}`);
                 setInvoice(response.data);
             } catch (error) {
                 console.error("Error fetching invoice:", error);

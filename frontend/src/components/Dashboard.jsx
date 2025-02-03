@@ -6,7 +6,7 @@ const Dashboard = () => {
     const [summary, setSummary] = useState({ total: 0, paid: 0, pending: 0, overdue: 0 });
 
     useEffect(() => {
-        axios.get("https://invoice-and-payment-management-app.onrender.com/api/invoices")
+        axios.get(`${import.meta.env.VITE_API_URL}/api/invoices`)
             .then(res => setInvoices(res.data))
             .catch(err => console.error(err));
         fetchSummary();
@@ -14,7 +14,7 @@ const Dashboard = () => {
 
     const fetchSummary = async () => {
         try {
-            const response = await axios.get('https://invoice-and-payment-management-app.onrender.com/api/invoices/summary');
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices/summary`);
             setSummary(response.data);
         } catch (error) {
             console.error("Error fetching summary:", error);

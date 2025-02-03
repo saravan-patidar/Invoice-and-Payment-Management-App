@@ -15,7 +15,7 @@ const InvoiceList = () => {
 
     const fetchInvoices = async () => {
         try {
-            const response = await axios.get('https://invoice-and-payment-management-app.onrender.com/api/invoices');
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/invoices`);
             setInvoices(response.data);
         } catch (error) {
             console.error("Error fetching invoices:", error);
@@ -25,7 +25,7 @@ const InvoiceList = () => {
 
     const markAsPaid = async (id) => {
         try {
-            await axios.put(`https://invoice-and-payment-management-app.onrender.com/api/invoices/mark-paid/${id}`);
+            await axios.put(`${import.meta.env.VITE_API_URL}/api/invoices/mark-paid/${id}`);
             fetchInvoices(); // Refresh invoice list
             fetchSummary();  // Refresh summary
         } catch (error) {
@@ -35,7 +35,7 @@ const InvoiceList = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`https://invoice-and-payment-management-app.onrender.com/api/invoices/remove/${id}`);
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/invoices/remove/${id}`);
             alert(response.data.message);
             setInvoices(invoices.filter(invoice => invoice._id !== id));
         } catch (error) {

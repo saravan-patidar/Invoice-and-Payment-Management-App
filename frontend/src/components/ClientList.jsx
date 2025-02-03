@@ -9,7 +9,7 @@ const ClientList = () => {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const response = await axios.get("https://invoice-and-payment-management-app.onrender.com/api/clients");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/clients`);
         setClients(response.data);
       } catch (error) {
         console.error("Error fetching clients:", error);
@@ -20,7 +20,7 @@ const ClientList = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`https://invoice-and-payment-management-app.onrender.com/api/clients/remove/${id}`);
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/clients/remove/${id}`);
       alert(response.data.message);
       setClients(clients.filter(client => client._id !== id));
     } catch (error) {
