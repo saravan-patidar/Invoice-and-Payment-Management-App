@@ -23,7 +23,7 @@ const ClientForm = () => {
         e.preventDefault();
         try {
             // console.log(formData)
-            const response = await axios.post("http://localhost:3000/api/clients/create", formData);
+            const response = await axios.post("https://invoice-and-payment-management-app.onrender.com/api/clients/create", formData);
 
             console.log("Client created:", response.data);
             setFormData({

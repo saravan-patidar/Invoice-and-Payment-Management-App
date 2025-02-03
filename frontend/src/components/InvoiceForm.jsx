@@ -17,7 +17,7 @@ const InvoiceForm = () => {
     useEffect(() => {
         const fetchClients = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/api/clients");
+                const response = await axios.get("https://invoice-and-payment-management-app.onrender.com/api/clients");
                 
                 setClients(response.data ); // Assuming the response is an array of clients
             } catch (error) {
@@ -65,7 +65,7 @@ const InvoiceForm = () => {
         const totalWithTax = total + (total * formData.tax) / 100;
         
         try {
-            const response = await axios.post("http://localhost:3000/api/invoices/create", {...formData,totalAmount:totalWithTax});
+            const response = await axios.post("https://invoice-and-payment-management-app.onrender.com/api/invoices/create", {...formData,totalAmount:totalWithTax});
             alert('Invoice created successfully');
             navigate('/invoices');
 
