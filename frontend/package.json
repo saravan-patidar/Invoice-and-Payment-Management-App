@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "https://saravan-patidar.github.io/Invoice-and-Payment-Management-App",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,12 +9,15 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/vite": "^4.0.3",
     "axios": "^1.7.9",
+    "gh-pages": "^6.3.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.5",

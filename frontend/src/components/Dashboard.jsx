@@ -9,7 +9,7 @@ const Dashboard = () => {
     useEffect(() => {
         fetchSummary();
     }, []);
-
+    console.log("API URL:", API_URL);
     const fetchSummary = async () => {
         try {
             const response = await axios.get(`${API_URL}/api/invoices/summary`);
