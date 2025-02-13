@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../utils";
 
 const ReportsDashboard = () => {
-    const API_URL = import.meta.env.VITE_API_URL;
     const [totalIncome, setTotalIncome] = useState(0);
     const [overduePayments, setOverduePayments] = useState(0);
     const [salesData, setSalesData] = useState(0);

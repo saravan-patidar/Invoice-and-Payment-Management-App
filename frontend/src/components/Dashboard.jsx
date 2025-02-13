@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../utils";
 
 const Dashboard = () => {
     const [summary, setSummary] = useState({ total: 0, paid: 0, pending: 0, overdue: 0 });
 
-    const API_URL = import.meta.env.VITE_API_URL;
-
     useEffect(() => {
         fetchSummary();
     }, []);
-    console.log("API URL:", API_URL);
     const fetchSummary = async () => {
         try {
             const response = await axios.get(`${API_URL}/api/invoices/summary`);

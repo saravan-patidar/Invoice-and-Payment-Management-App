@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { DocumentIcon ,TrashIcon } from "@heroicons/react/24/solid";
 import InvoiceDetails from "./InvoiceDetails";
+import { API_URL } from "../utils";
 
 const InvoiceList = () => {
     const [invoices, setInvoices] = useState([]);

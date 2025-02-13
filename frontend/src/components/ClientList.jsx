@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import{UserIcon} from "@heroicons/react/24/solid";
+import { API_URL } from "../utils";
 
 const ClientList = () => {
-  const API_URL = import.meta.env.VITE_API_URL;
   const [clients, setClients] = useState([]);
 
   // Fetch all clients when the component is mounted

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../utils";
 
 const InvoiceDetails = ({ invoiceId, onClose }) => {
     const [invoice, setInvoice] = useState(null);
-    const API_URL = import.meta.env.VITE_API_URL;
+    // const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchInvoice = async () => {
