@@ -17,10 +17,11 @@ const checkOverdueInvoices = async()=>{
             await invoice.save();
 
             if(invoice.clientId && invoice.clientId.email){
+
                 await sendPaymentReminder(invoice.clientId.email,invoice.invoiceTitle,invoice.dueDate);
             }
         }
-        console.log(`${overdueInvoices.length} invoices marked as overdue.`)
+        // console.log(`${overdueInvoices.length} invoices marked as overdue.`)
     }catch(error){
         console.error('Error checking overdue invoices:',error)
     }

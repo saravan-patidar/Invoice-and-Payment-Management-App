@@ -4,7 +4,6 @@ import 'jspdf-autotable';
 export const  API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000" ; 
 
 export const onDownloadInvoicePDF = (invoice) => {
-    // console.log(invoice)
     const doc = new jsPDF;
     // Title
     doc.setFontSize(20);

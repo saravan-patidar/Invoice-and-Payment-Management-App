@@ -25,7 +25,6 @@ const ClientForm = () => {
         try {
             const response = await axios.post(`${API_URL}/api/clients/create`, formData);
 
-            // console.log("Client created:", response.data);
             setFormData({
                 name: "",
                 email: "",

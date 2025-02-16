@@ -8,8 +8,8 @@ const createTransporter = async () => {
         let testAccount = await nodemailer.createTestAccount();
         Test_Email = testAccount.user;
         Test_Password = testAccount.pass;
-        console.log("Test Email:", testAccount.user);
-        console.log("Test Password:", testAccount.pass);
+        // console.log("Test Email:", testAccount.user);
+        // console.log("Test Password:", testAccount.pass);
 
         return nodemailer.createTransport({
             host: "smtp.ethereal.email",
