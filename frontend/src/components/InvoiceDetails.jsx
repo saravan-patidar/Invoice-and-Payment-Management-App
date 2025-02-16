@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { API_URL } from "../utils";
+import { API_URL ,onDownloadInvoicePDF} from "../utils";
 
 const InvoiceDetails = ({ invoiceId, onClose }) => {
     const [invoice, setInvoice] = useState(null);
-    // const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchInvoice = async () => {
@@ -19,6 +18,7 @@ const InvoiceDetails = ({ invoiceId, onClose }) => {
         if (invoiceId) fetchInvoice();
     }, [invoiceId]);
 
+
     if (!invoice) return <p>Loading invoice details...</p>;
 
     return (
@@ -29,6 +29,7 @@ const InvoiceDetails = ({ invoiceId, onClose }) => {
                 <p><strong>Status:</strong> {invoice.status}</p>
                 <p><strong>Total Amount:</strong> ₹{invoice.totalAmount}</p>
                 <p><strong>Due Date:</strong> {new Date(invoice.dueDate).toDateString()}</p>
+                <p><strong>Tax:</strong> {invoice.tax}</p>
                 {invoice.paymentDate && <p><strong>Payment Date:</strong> {new Date(invoice.paymentDate).toDateString()}</p>}
 
                 <h3 className="mt-4 text-lg font-semibold">Items:</h3>
@@ -50,6 +51,9 @@ const InvoiceDetails = ({ invoiceId, onClose }) => {
 
                 <button onClick={onClose} className="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
                     Close
+                </button>
+                <button onClick={() => onDownloadInvoicePDF(invoice)} className="mt-4 bg-green-400 mx-3 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                    Download
                 </button>
             </div>
         </div>

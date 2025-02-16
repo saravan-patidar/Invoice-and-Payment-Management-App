@@ -27,8 +27,7 @@ const InvoiceList = () => {
     const markAsPaid = async (id) => {
         try {
             await axios.put(`${API_URL}/api/invoices/mark-paid/${id}`);
-            fetchInvoices(); // Refresh invoice list
-            fetchSummary();  // Refresh summary
+            fetchInvoices(); 
         } catch (error) {
             console.error("Error marking invoice as paid:", error);
         }
@@ -44,6 +43,7 @@ const InvoiceList = () => {
         }
     };
 
+    
     return (
         <div className="max-w-6xl mx-auto p-6 bg-white shadow-md rounded-lg">
             <h2 className="text-2xl font-bold mb-4">Invoices</h2>

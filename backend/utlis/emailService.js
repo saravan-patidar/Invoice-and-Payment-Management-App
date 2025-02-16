@@ -11,7 +11,7 @@ const createTransporter = async () => {
         console.log("Test Email:", testAccount.user);
         console.log("Test Password:", testAccount.pass);
 
-        const transporter = nodemailer.createTransport({
+        return nodemailer.createTransport({
             host: "smtp.ethereal.email",
             port: 587,
             auth: {
@@ -19,7 +19,6 @@ const createTransporter = async () => {
                 pass: Test_Password, // Your email app password
             },
         });
-        return transporter;
 
     } catch (error) {
         console.error("Error creating test account:", error);

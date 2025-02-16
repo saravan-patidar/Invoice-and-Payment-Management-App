@@ -2,6 +2,29 @@ const express = require("express");
 const router = express.Router();
 
 const Invoice = require("../models/Invoice");
+const sendPaymentReminder = require('../utlis/emailService');
+
+const checkOverdueInvoices = async()=>{
+    try{
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const overdueInvoices = await Invoice.find({status:'Pending',dueDate:{$lt:today}}).populate('clientId');
+        
+        if(overdueInvoices.length === 0 ) return;
+
+        for(let invoice of overdueInvoices){
+            invoice.status = 'Overdue';
+            await invoice.save();
+
+            if(invoice.clientId && invoice.clientId.email){
+                await sendPaymentReminder(invoice.clientId.email,invoice.invoiceTitle,invoice.dueDate);
+            }
+        }
+        console.log(`${overdueInvoices.length} invoices marked as overdue.`)
+    }catch(error){
+        console.error('Error checking overdue invoices:',error)
+    }
+}
 
 router.get('/single/:id', async (req, res) => {
     try {
@@ -17,15 +40,33 @@ router.get('/single/:id', async (req, res) => {
 });
 
 router.post('/create',async(req,res)=>{
-
     try {
         const newInvoice = new Invoice(req.body);
         await newInvoice.save();
+        await newInvoice.populate("clientId");
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const invoiceDueDate = new Date(newInvoice.dueDate);
+        invoiceDueDate.setHours(0, 0, 0, 0);
+
+        if(invoiceDueDate < today){
+            newInvoice.status = 'Overdue';
+            await newInvoice.save();
+            if(newInvoice.clientId && newInvoice.clientId.email){
+                await sendPaymentReminder(newInvoice.clientId.email,newInvoice.invoiceTitle,newInvoice.dueDate);
+            }
+        }
         res.status(201).json(newInvoice);
     } catch (error) {
         res.status(400).json({ message: "Error creating invoice", error });
     }
+
 })
+
+setInterval(checkOverdueInvoices, 24 * 60 * 60 * 1000);
+checkOverdueInvoices();
+
 
 router.get('/', async (req, res) => {
     try {
@@ -35,6 +76,7 @@ router.get('/', async (req, res) => {
         res.status(400).json({ message: "Error fetching invoices", error });
     }
 });
+
 
 
 router.put('/mark-paid/:id',async(req,res)=>{
